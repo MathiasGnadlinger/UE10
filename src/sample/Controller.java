@@ -11,7 +11,7 @@ public class Controller
     private Stack<String> stack = new Stack<String>();
 
     StringBuilder sb1 = new StringBuilder();                                        //StringBuilder for the TextField
-    
+    StringBuilder sb2 = new StringBuilder();                                        //StringBuilder for the TextArea
 
 
     @FXML private Button btn0;
@@ -98,4 +98,146 @@ public class Controller
         }
     }
 
+
+    public void enter()
+    {
+        if (btnEnter.isHover())
+        {
+            stack.push(sb1.toString());
+            sb2.append(String.format("%s \n", sb1));
+            TextArea.setText(sb2.toString());
+
+            TextF_I_O.clear();
+            sb1.delete(0, sb1.length());
+        }
+    }
+
+    public void clear_C()
+    {
+        if (btnClear.isHover())
+        {
+            stack.clear();
+            TextArea.clear();
+            TextF_I_O.clear();
+            sb1.delete(0, sb1.length());
+            sb2.delete(0, sb2.length());
+        }
+    }
+
+    public void clear_CE()
+    {
+        if (btnClearEntry.isHover())
+        {
+            TextF_I_O.clear();
+            sb1.delete(0, sb1.length());
+        }
+    }
+
+    public void plus()
+    {
+        if (btnPlus.isHover())
+        {
+            try {
+                double Output1 = Double.parseDouble(stack.pop());
+                double Output2 = Double.parseDouble(stack.pop());
+
+                double sum = Output2 + Output1;
+                stack.push(String.valueOf(sum));
+                TextArea.setText(String.valueOf(sum));
+            } catch (Exception e)
+            {
+                TF_Error.setText("Geben Sie mehr Werte ein!");
+            }
+        }
+    }
+
+    public void minus()
+    {
+        if (btnMinus.isHover())
+        {
+            try {
+                double Output1 = Double.parseDouble(stack.pop());
+                double Output2 = Double.parseDouble(stack.pop());
+
+                double sum = Output2 - Output1;
+                stack.push(String.valueOf(sum));
+                TextArea.setText(String.valueOf(sum));
+            } catch (Exception e)
+            {
+                TF_Error.setText("Geben Sie mehr Werte ein!");
+            }
+        }
+    }
+
+    public void multiply()
+    {
+        if (btnMultiply.isHover())
+        {
+            try {
+                double Output1 = Double.parseDouble(stack.pop());
+                double Output2 = Double.parseDouble(stack.pop());
+
+                double sum = Output2 * Output1;
+                stack.push(String.valueOf(sum));
+                TextArea.setText(String.valueOf(sum));
+            } catch (Exception e)
+            {
+                TF_Error.setText("Geben Sie mehr Werte ein!");
+            }
+        }
+    }
+
+    public void divide()
+    {
+        if (btnDivide.isHover())
+        {
+            try {
+                double Output1 = Double.parseDouble(stack.pop());
+                double Output2 = Double.parseDouble(stack.pop());
+
+                double sum = Output2 / Output1;
+                stack.push(String.valueOf(sum));
+                TextArea.setText(String.valueOf(sum));
+            } catch (Exception e)
+            {
+                TF_Error.setText("Geben Sie mehr Werte ein!");
+            }
+        }
+    }
+
+    public void reciprocal()
+    {
+        if (btnReciprocal.isHover())
+        {
+            try {
+                double Output1 = Double.parseDouble(stack.pop());
+
+                double sum = 1 / Output1;
+                stack.push(String.valueOf(sum));
+                TextArea.setText(String.valueOf(sum));
+            } catch (Exception e)
+            {
+                TF_Error.setText("Geben Sie einen Wert ein!");
+            }
+        }
+    }
+
+    public void change()
+    {
+        if (btnChange.isHover())
+        {
+            try {
+                double Output1 = Double.parseDouble(stack.pop());
+                double Output2 = Double.parseDouble(stack.pop());
+
+                stack.push(String.valueOf(Output2));
+                stack.push(String.valueOf(Output1));
+                TextArea.setText(String.valueOf(stack));
+
+            } catch (Exception e)
+            {
+                TF_Error.setText("Geben Sie mehr Werte ein!");
+            }
+        }
+    }
 }
