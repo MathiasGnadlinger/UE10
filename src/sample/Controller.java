@@ -5,13 +5,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import java.util.Stack;
-
+/**
+ * @author Mathias Gnadlinger
+ * @version 10, 22.12.2020
+ */
 public class Controller
 {
     private Stack<String> stack = new Stack<String>();
 
-    StringBuilder sb1 = new StringBuilder();                                        //StringBuilder for the TextField
-    StringBuilder sb2 = new StringBuilder();                                        //StringBuilder for the TextArea
+    StringBuilder sbTF = new StringBuilder();                                        //StringBuilder für das TextField
+    StringBuilder sbTA = new StringBuilder();                                        //StringBuilder für das TextArea
 
 
     @FXML private Button btn0;
@@ -43,72 +46,72 @@ public class Controller
     @FXML private TextArea TextArea;
 
 
-    public void inputNumbers()
+    public void inputNumbers()                                  //Hier werden die Nummern und das Vorzeichen und Komma ausgelesen
     {
         if (btn0.isHover())
         {
-            sb1.append(0);
-            TextF_I_O.setText(sb1.toString());
+            sbTF.append(0);                                     //Um StringBuilder zu sagen das er den Wert xy ausgeben soll
+            TextF_I_O.setText(sbTF.toString());                 //Ausgabe in das Textfeld
         } else if (btn1.isHover())
         {
-            sb1.append(1);
-            TextF_I_O.setText(sb1.toString());
+            sbTF.append(1);
+            TextF_I_O.setText(sbTF.toString());
         } else if (btn2.isHover())
         {
-            sb1.append(2);
-            TextF_I_O.setText(sb1.toString());
+            sbTF.append(2);
+            TextF_I_O.setText(sbTF.toString());
         } else if (btn3.isHover())
         {
-            sb1.append(3);
-            TextF_I_O.setText(sb1.toString());
+            sbTF.append(3);
+            TextF_I_O.setText(sbTF.toString());
         } else if (btn4.isHover())
         {
-            sb1.append(4);
-            TextF_I_O.setText(sb1.toString());
+            sbTF.append(4);
+            TextF_I_O.setText(sbTF.toString());
         } else if (btn5.isHover())
         {
-            sb1.append(5);
-            TextF_I_O.setText(sb1.toString());
+            sbTF.append(5);
+            TextF_I_O.setText(sbTF.toString());
         } else if (btn6.isHover())
         {
-            sb1.append(6);
-            TextF_I_O.setText(sb1.toString());
+            sbTF.append(6);
+            TextF_I_O.setText(sbTF.toString());
         } else if (btn7.isHover())
         {
-            sb1.append(7);
-            TextF_I_O.setText(sb1.toString());
+            sbTF.append(7);
+            TextF_I_O.setText(sbTF.toString());
         } else if (btn8.isHover())
         {
-            sb1.append(8);
-            TextF_I_O.setText(sb1.toString());
+            sbTF.append(8);
+            TextF_I_O.setText(sbTF.toString());
         } else if (btn9.isHover())
         {
-            sb1.append(9);
-            TextF_I_O.setText(sb1.toString());
+            sbTF.append(9);
+            TextF_I_O.setText(sbTF.toString());
         }
         else if(btnComma.isHover())
         {
-            sb1.append(".");
-            TextF_I_O.setText(sb1.toString());
+            sbTF.append(".");
+            TextF_I_O.setText(sbTF.toString());
         }
         else if(btnPlus_Minus.isHover())
         {
-            sb1.append("-");
-            TextF_I_O.setText(sb1.toString());
+            sbTF.append("-");
+            TextF_I_O.setText(sbTF.toString());
         }
     }
 
 
-    public void enter()
+    public void enter()                                             //Wert wird in den Stack geladen und anschließend in TextArea ausgegeben, auch wird die Eingabe von dem TextField gelöscht.
     {
         if (btnEnter.isHover())
         {
-            stack.push(sb1.toString());
-            sb2.append(String.format("%s \n", sb1));
-            TextArea.setText(sb2.toString());
+            stack.push(sbTF.toString());
+            sbTA.append(String.format("%s \n", sbTF));
+            TextArea.setText(sbTA.toString());
 
             TextF_I_O.clear();
-            sb1.delete(0, sb1.length());
+            sbTF.delete(0, sbTF.length());                          //Der WErt muss noch extra gelöscht werden da sonst mit dem Wert der im StringBuilder hinterlegt ist weitergeschrieben wird
         }
     }
 
@@ -119,8 +122,8 @@ public class Controller
             stack.clear();
             TextArea.clear();
             TextF_I_O.clear();
-            sb1.delete(0, sb1.length());
-            sb2.delete(0, sb2.length());
+            sbTF.delete(0, sbTF.length());
+            sbTA.delete(0, sbTA.length());
         }
     }
 
@@ -129,7 +132,7 @@ public class Controller
         if (btnClearEntry.isHover())
         {
             TextF_I_O.clear();
-            sb1.delete(0, sb1.length());
+            sbTF.delete(0, sbTF.length());
         }
     }
 
@@ -138,11 +141,11 @@ public class Controller
         if (btnPlus.isHover())
         {
             try {
-                double Output1 = Double.parseDouble(stack.pop());
+                double Output1 = Double.parseDouble(stack.pop());   //Wert wird ausgelesen
                 double Output2 = Double.parseDouble(stack.pop());
 
-                double sum = Output2 + Output1;
-                stack.push(String.valueOf(sum));
+                double sum = Output2 + Output1;                     //Lösung wird berechnet
+                stack.push(String.valueOf(sum));                    //Wert wird wieder in den Stack geladen und anschließend wieder ausgegeben
                 TextArea.setText(String.valueOf(sum));
             } catch (Exception e)
             {
@@ -230,9 +233,9 @@ public class Controller
                 double Output1 = Double.parseDouble(stack.pop());
                 double Output2 = Double.parseDouble(stack.pop());
 
-                stack.push(String.valueOf(Output2));
+                stack.push(String.valueOf(Output2));                        //Stack wird eingelesen und umgekehrt ausgegeben
                 stack.push(String.valueOf(Output1));
-                TextArea.setText(String.valueOf(stack));
+                TextArea.setText(String.valueOf(stack));                    //Ausgabe nicht mit TextArea.setText(String.valueOf(Output1)); und TextArea.setText(String.valueOf(Output1)); da sonst nu einer der beiden Werte ausgegeben wird
 
             } catch (Exception e)
             {
