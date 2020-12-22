@@ -18,7 +18,7 @@ public class Main extends Application {
     {
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("UPN-Rechner");
-        primaryStage.getIcons().add(new Image("/sample/Rechner.png"));
+        //primaryStage.getIcons().add(new Image("/sample/Rechner.png"));
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
